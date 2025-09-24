@@ -1,0 +1,59 @@
+{
+  "info": {
+    "name": "JES API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Tenants",
+      "item": [
+        {"name":"Read","request":{"method":"GET","url":"{{baseUrl}}/Tenants/read_tenants.php"}},
+        {"name":"Search","request":{"method":"GET","url":"{{baseUrl}}/Tenants/search_tenant.php?s=Иванов"}},
+        {"name":"Create","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"full_name\": \"Иванов И.И.\",\n  \"phone\": \"+375291112233\"\n}"},"url":"{{baseUrl}}/Tenants/create_tenant.php"}},
+        {"name":"Update","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"account_id\": 1,\n  \"full_name\": \"Иванов И.И.\",\n  \"phone\": \"+375291112233\"\n}"},"url":"{{baseUrl}}/Tenants/update_tenant.php"}},
+        {"name":"Delete","request":{"method":"DELETE","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"account_id\": 1\n}"},"url":"{{baseUrl}}/Tenants/delete_tenant.php"}}
+      ]
+    },
+    {
+      "name": "Apartments",
+      "item": [
+        {"name":"Read","request":{"method":"GET","url":"{{baseUrl}}/Apartments/read_apartments.php"}},
+        {"name":"Search","request":{"method":"GET","url":"{{baseUrl}}/Apartments/search_apartment.php?s=Ленина"}},
+        {"name":"Create","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"address\": \"Минск, Ленина 1-1\",\n  \"residents\": 2,\n  \"area\": 45.0,\n  \"account_id\": 1\n}"},"url":"{{baseUrl}}/Apartments/create_apartment.php"}},
+        {"name":"Update","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"apartment_id\": 1,\n  \"address\": \"Минск, Ленина 1-1\",\n  \"residents\": 2,\n  \"area\": 45.0,\n  \"account_id\": 1\n}"},"url":"{{baseUrl}}/Apartments/update_apartment.php"}},
+        {"name":"Delete","request":{"method":"DELETE","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"apartment_id\": 1\n}"},"url":"{{baseUrl}}/Apartments/delete_apartment.php"}}
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {"name":"Read","request":{"method":"GET","url":"{{baseUrl}}/Services/read_services.php"}},
+        {"name":"Search","request":{"method":"GET","url":"{{baseUrl}}/Services/search_service.php?s=отопление"}},
+        {"name":"Create","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"service_type\": \"отопление\",\n  \"unit\": \"гКал\",\n  \"tariff\": 90.5\n}"},"url":"{{baseUrl}}/Services/create_service.php"}},
+        {"name":"Update","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"service_id\": 1,\n  \"service_type\": \"отопление\",\n  \"unit\": \"гКал\",\n  \"tariff\": 90.5\n}"},"url":"{{baseUrl}}/Services/update_service.php"}},
+        {"name":"Delete","request":{"method":"DELETE","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"service_id\": 1\n}"},"url":"{{baseUrl}}/Services/delete_service.php"}}
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {"name":"Read","request":{"method":"GET","url":"{{baseUrl}}/Payments/read_payments.php"}},
+        {"name":"Search","request":{"method":"GET","url":"{{baseUrl}}/Payments/search_payment.php?s=1"}},
+        {"name":"Create","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"account_id\": 1,\n  \"service_id\": 1,\n  \"consumed\": 3.5,\n  \"due_date\": \"2025-09-15\",\n  \"paid_on_time\": false,\n  \"payment_date\": \"2025-09-20\"\n}"},"url":"{{baseUrl}}/Payments/create_payment.php"}},
+        {"name":"Update","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"payment_id\": 1,\n  \"account_id\": 1,\n  \"service_id\": 1,\n  \"consumed\": 3.5,\n  \"due_date\": \"2025-09-15\",\n  \"paid_on_time\": false,\n  \"payment_date\": \"2025-09-20\"\n}"},"url":"{{baseUrl}}/Payments/update_payment.php"}},
+        {"name":"Delete","request":{"method":"DELETE","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"payment_id\": 1\n}"},"url":"{{baseUrl}}/Payments/delete_payment.php"}}
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {"name":"Penalty by Payment","request":{"method":"GET","url":"{{baseUrl}}/Reports/penalty_by_payment.php?id=1"}},
+        {"name":"Defaulters","request":{"method":"GET","url":"{{baseUrl}}/Reports/defaulters.php"}},
+        {"name":"Monthly Amounts","request":{"method":"GET","url":"{{baseUrl}}/Reports/monthly_amounts.php?month=2025-09"}}
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8000" }
+  ]
+}

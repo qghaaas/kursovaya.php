@@ -1,0 +1,33 @@
+<?php
+
+use objects\Tenants;
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: PUT");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+include_once '../config/database.php';
+include_once '../objects/Tenants.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$tenant = new Tenants($db);
+$data = json_decode(file_get_contents("php://input"));
+
+if(!empty($data->account_id) && !empty($data->full_name) && !empty($data->phone)){
+    $tenant->account_id = $data->account_id;
+    $tenant->full_name = $data->full_name;
+    $tenant->phone = $data->phone;
+    if($tenant->update()){
+        http_response_code(200);
+        echo json_encode(["message" => "Квартиросъемщик обновлён"], JSON_UNESCAPED_UNICODE);
+    } else {
+        http_response_code(503);
+        echo json_encode(["message" => "Не удалось обновить"], JSON_UNESCAPED_UNICODE);
+    }
+} else {
+    http_response_code(400);
+    echo json_encode(["message" => "Не хватает полей: account_id, full_name, phone"], JSON_UNESCAPED_UNICODE);
+}

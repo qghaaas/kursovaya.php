@@ -1,0 +1,31 @@
+<?php
+
+use objects\Services;
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: DELETE");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+include_once '../config/database.php';
+include_once '../objects/Services.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$svc = new Services($db);
+$data = json_decode(file_get_contents("php://input"));
+
+if(!empty($data->service_id)){
+    $svc->service_id = $data->service_id;
+    if($svc->delete()){
+        http_response_code(200);
+        echo json_encode(["message" => "Услуга удалена"], JSON_UNESCAPED_UNICODE);
+    } else {
+        http_response_code(503);
+        echo json_encode(["message" => "Не удалось удалить услугу"], JSON_UNESCAPED_UNICODE);
+    }
+} else {
+    http_response_code(400);
+    echo json_encode(["message" => "Не хватает поля: service_id"], JSON_UNESCAPED_UNICODE);
+}
